@@ -56,9 +56,6 @@ as a single logarithm of a ratio.
 
 This loss function is implemented in score_model.py.
 
-Setup
-======================
-Run `pip install git+https://github.com/gschool/dsi-performotron.git`.
 
 Data
 ======================
@@ -73,9 +70,6 @@ format specified in `data/median_benchmark.csv`. Then you can submit your
 solution for evaluation using the command:
 
     python score_model.py data/your_predictions.csv
-
-Note that this will announce your score on Slack to everybody else, but feel
-free to submit an early model to make sure you have a working model.
 
 Be wary about scoring the test set too many times.  If you respond to your test
 set loss by changing your model, you risk overfitting to the test set, which is
