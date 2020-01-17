@@ -65,7 +65,17 @@ data['ProductSize'] = data['ProductSize'].fillna('Compact').replace({'Mini':0, '
 
 data["Age"] = (data["saledate"].map(lambda x: int(x.split(" ")[0][-4:])))-data["YearMade"]
 
-final_train = data[['SalePrice','Age','MachineHoursCurrentMeter','ProductSize']]
+final_train_1940_below = data[data['YearMade']<1940]
+final_train_1940_above = data[data['YearMade']>1940]
+final_train = final_train_1940_below[['SalePrice','Age','MachineHoursCurrentMeter','ProductSize']]
+y = final_train['SalePrice']
+X = final_train[['Age','MachineHoursCurrentMeter','ProductSize']]
+X = sm.add_constant(X)
+model = sm.OLS(y, X)
+results = model.fit()
+coeffs = results.params
+
+final_train = final_train_1940_above[['SalePrice','Age','MachineHoursCurrentMeter','ProductSize']]
 y = final_train['SalePrice']
 X = final_train[['Age','MachineHoursCurrentMeter','ProductSize']]
 X = sm.add_constant(X)
