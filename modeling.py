@@ -43,17 +43,21 @@ plt.ylabel('Log(Sale Price)')
 #%%
 data = pd.read_csv("C:/Users/walke/Documents/galvanize/case_studies/regression-case-study/data/train.csv")
 data['SalePrice'] = np.log(data['SalePrice'])
-data['MachineHoursCurrentMeter'][data['MachineHoursCurrentMeter']!=0 & ~ data['MachineHoursCurrentMeter'].isnull()] = np.log(data['MachineHoursCurrentMeter'][data['MachineHoursCurrentMeter']!=0 & ~ data['MachineHoursCurrentMeter'].isnull()])
+#data['MachineHoursCurrentMeter'][data['MachineHoursCurrentMeter']!=0 & ~ data['MachineHoursCurrentMeter'].isnull()] = np.log(data['MachineHoursCurrentMeter'][data['MachineHoursCurrentMeter']!=0 & ~ data['MachineHoursCurrentMeter'].isnull()])
 data = data[data['YearMade']>1940]
 data['MachineHoursCurrentMeter'][data['MachineHoursCurrentMeter']==0] = hours_mean
 data['MachineHoursCurrentMeter'][data['MachineHoursCurrentMeter'].isnull()] = hours_mean
 data = data[data['MachineHoursCurrentMeter']<hours_threshold]
 y = data['SalePrice']
 X = data[['MachineHoursCurrentMeter']]
-model = sm.OLS(y, X)
 X = sm.add_constant(X)
+model = sm.OLS(y, X)
 results = model.fit()
 plt.scatter(X['MachineHoursCurrentMeter'],y,alpha=0.1)
 plt.plot(X['MachineHoursCurrentMeter'],X['MachineHoursCurrentMeter'].map(lambda x: const + x*hours),color='r')
-#model = LinearRegression()
-#model.fit(X, y)
+plt.title('Usage Price Model')
+plt.xlabel('Machine Hours')
+plt.ylabel('Log(Sale Price)')
+#%%
+data = pd.read_csv("C:/Users/walke/Documents/galvanize/case_studies/regression-case-study/data/train.csv")
+data['SalePrice'] = np.log(data['SalePrice'])
