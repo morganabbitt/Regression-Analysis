@@ -82,20 +82,3 @@ X = sm.add_constant(X)
 model = sm.OLS(y, X)
 results = model.fit()
 coeffs = results.params
-
-"""X_new = sm.add_constant(data['ProductSize'])
-y_new = data['SalePrice']
-model_new = sm.OLS(y_new, X_new)
-results_new = model_new.fit()
-results_new.summary()
-fig, ax = plt.subplots(figsize=(15,10))
-ax.scatter(y_new, results_new.resid, alpha=0.01)
-plt.axhline(0, linestyle='--',color='r')
-plt.title('Residuals of Numeric Rank of Product Size', size=25)
-plt.xlabel('Log Price', size=20)
-plt.ylabel('Residuals')
-
-const, size = results_new.params
-fig, ax = plt.subplots(figsize=(15,10))
-plt.scatter(data['ProductSize'], data['SalePrice'], alpha=0.002, s=120)
-plt.plot(data['ProductSize'], data['ProductSize'].map(lambda x: const + size * x), color='r', linestyle='--', linewidth=5)"""
