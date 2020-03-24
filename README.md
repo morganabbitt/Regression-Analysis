@@ -1,43 +1,60 @@
-Regression Case Study
+# Regression Case Study
 ======================
+### Contents
 
-In today's exercise you'll get a chance to try some of what you've learned
-about supervised learning on a real-world problem.
-
-The goal of the contest is to predict the sale price of a particular piece of
-heavy equipment at auction based on its usage, equipment type, and
-configuration.  The data is sourced from auction result postings and includes
-information on usage and equipment configurations.
+1. [Goals](#goals)
+2. [Data](#data)
+3. [Github Workflow](#git)
+4. [Regression](#reg)
+5. [Conclusions](#conclusion)
 
 
-Version Control
+In today's exercise you'll get a chance to try some of what you've learned about supervised learning on a real-world problem.
+
+The goal of the contest is to predict the sale price of a particular piece of heavy equipment at auction based on its usage, equipment type, and configuration.  The data is sourced from auction result postings and includes information on usage and equipment configurations.
+
+<a name="goals"></a>
+### Goals
 =====================
-Before you begin feature engineering and model building, you will need to establish
-a workflow for your team. For this you will git and github! Version control is your friend.
-The last thing you want at the end of the day is version proliferation with
-multiple, conflicting versions of your code floating around on Slack, email or elsewhere.
-Instead, you want one centralized repository of code that is version controlled
-and shared between every member of your team. Here is a recommended workflow:
+In this project we were given a team and equiptment data and we were asked to use different types of regression to predict the most accurate price while minimizing Root Mean Squared Log Error. 
 
-* Your team captain should fork the [case study repository](https://github.com/GalvanizeDataScience/regression-case-study). This will be your team's "upstream repo".
-* All other team members should fork the upstream repo.
-* Everyone clones their own forked repo to their own local machine.
-* On your local machine, create and checkout a branch to work on: `git checkout -b <feature_name>`. This will be your feature branch. No one works on the master branch, not even the upstream owner.
-* Do your work.
-* Everytime you complete an atomic piece of work: `git add -p` `git commit -m` `git push origin <your feature branch>`
-  * `git add -p` to interactively stage chunks of new/modified code. This is crucial to ensuring you commit only what you intend.
-  * `git commit -m <something useful>`. Your commit messages serve as documentation and communication for your team.
-  Example of a _good_ commit message: "add private method to feature engineering class to one-hot-encode categorical variables".
-  Examples of a _useless_ commit message: "stuff", "commit", "bug fix".
-  * `git push origin feature_1`, `git pull -r origin master`. Be explicit about which remote branch you want when you push/pull.
-* Once a useful chunk of work is complete, issue a pull request to merge your branch with the upstream repo.
-* The owner of the upstream repo can accept your pull request and merge it into the upstream master branch, then delete your feature branch.
-* Iterate frequently.
-* Avoid merge conflicts by working on separable areas of code and rebasing often `git pull -r origin master`.
-* In the end, everything will be merged to the master branch in the upstream repo.  This will be your “production” code that everyone will have a copy of in the end.
-* Consult the [github documentation](https://guides.github.com/introduction/flow/) if/when you get stuck.
+We worked with Linear Regression, Logisitic Regression, and even attempted Regularized Regression to minimize our RMSLE. 
 
-Evaluation
+This README will go over some of the challenges we faced, along with our Regression results. 
+
+<a name="data"></a>
+### Data
+=====================
+
+The data for this case study are in `./data`. There you will find both training and testing data sets. We trained on the training set and evaluated our final model only on the testing dataset. For model selection and model comparison, we used Cross Fold Validation to evaluate each model and to avoid overfitting. 
+
+We read in the data using pandas `pd.read_csv('data/Train.zip')`. 
+
+This training data had 401,000 rows and 53 features. 27 of the 53 features contained over 300,000 null values. 
+
+The biggest challenges we had was feature selection. The sale date of some of the equiptment was dated all the way back to 1919, which would scew results drascially. Besides feature selection we chose to impute missing values for features that had only a few null values, we used different metrics depending on the feature like the mode or mean. 
+
+This dataset required a lot of preprocessing and data cleaning. 
+
+
+<a name="git"></a>
+### Github Workflow
+=====================
+
+Our Workflow is as follows:
+
+As the team lead on this Regression Project, I started our master repo and my teammates cloned my repository on Github and created their separate branches. 
+
+We all began EDA and feature exploration to come up with the best way to deal with our dataset. 
+
+I monitored each team members progress by utilizing `git fetch <your feature branch>` and through this we were able to maintain a steady pace throughout our project. 
+
+Everytime we completed an atomic piece of work: `git add -p` `git commit -m` `git push <your feature branch>`
+
+After our changes to our separate branches were made, I merged all of our production code from each branch into the master branch. 
+
+<a name="reg"></a>
+### Regression
 ======================
 The evaluation of your model will be based on Root Mean Squared Log Error.
 Which is computed as follows:
@@ -56,34 +73,7 @@ as a single logarithm of a ratio.
 
 This loss function is implemented in score_model.py.
 
-Setup
-======================
-Run `pip install git+https://github.com/gschool/dsi-performotron.git`.
 
-Data
-======================
-The data for this case study are in `./data`. Although there are both training
-and testing data sets, the testing data set will only be utilized to evaluate
-your final model performance.  In other words, you should use cross-validation
-on the training data set to identify potential models, then score those models
-on the test data.
-
-In order to score your model, you will need to output your predictions in the
-format specified in `data/median_benchmark.csv`. Then you can submit your
-solution for evaluation using the command:
-
-    python score_model.py data/your_predictions.csv
-
-Note that this will announce your score on Slack to everybody else, but feel
-free to submit an early model to make sure you have a working model.
-
-Be wary about scoring the test set too many times.  If you respond to your test
-set loss by changing your model, you risk overfitting to the test set, which is
-unrecoverable.  Overfitting to a test set can only be discovered after a model
-has been productionalized.
-
-Restrictions
-============
 When learning a predictive model, we would like you to use only *regression*
 methods for this case study.  The following techniques are legal
 
