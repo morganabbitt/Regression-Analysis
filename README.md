@@ -1,5 +1,5 @@
 # Regression Case Study
-======================
+---
 ### Contents
 
 1. [Goals](#goals)
@@ -15,7 +15,7 @@ The goal of the contest is to predict the sale price of a particular piece of he
 
 <a name="goals"></a>
 ### Goals
-=====================
+---
 In this project we were given a team and equiptment data and we were asked to use different types of regression to predict the most accurate price while minimizing Root Mean Squared Log Error. 
 
 We worked with Linear Regression, Logisitic Regression, and even attempted Regularized Regression to minimize our RMSLE. 
@@ -55,7 +55,7 @@ After our changes to our separate branches were made, I merged all of our produc
 
 <a name="reg"></a>
 ### Regression
-======================
+---
 The evaluation of your model will be based on Root Mean Squared Log Error.
 Which is computed as follows:
 
@@ -88,7 +88,7 @@ engineering), but your final submissions must be scores from a linear type
 model.
 
 Important Tips
-=========================
+---
 
 1. This data is messy. Try to use your judgement about where your
 cleaning efforts will yield the most results and focus there first.
