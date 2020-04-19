@@ -1,5 +1,5 @@
 # Regression Case Study
----
+
 ### Contents
 
 1. [Goals](#goals)
@@ -24,7 +24,7 @@ This README will go over some of the challenges we faced, along with our Regress
 
 <a name="data"></a>
 ### Data
-=====================
+---
 
 The data for this case study are in `./data`. There you will find both training and testing data sets. We trained on the training set and evaluated our final model only on the testing dataset. For model selection and model comparison, we used Cross Fold Validation to evaluate each model and to avoid overfitting. 
 
@@ -39,7 +39,7 @@ This dataset required a lot of preprocessing and data cleaning.
 
 <a name="git"></a>
 ### Github Workflow
-=====================
+---
 
 Our Workflow is as follows:
 
